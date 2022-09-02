@@ -19,9 +19,9 @@ set number
 colorscheme pyte
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => System Verilog Syntax
+" => verilog_systemverilog.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au! BufRead,BufNewFile *.v,*.vh,*.sv,*.svh,*.vf set filetype=systemverilog
+set foldmethod=syntax
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Eliminate the version error
