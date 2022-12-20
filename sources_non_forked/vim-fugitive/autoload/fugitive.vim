@@ -470,7 +470,7 @@ function! s:GitCmd() abort
       let string = strpart(string, len(arg))
       let arg = substitute(arg, '^\s\+', '', '')
       let arg = substitute(arg,
-            \ '\(' . dquote . '''\%(''''\|[^'']\)*''\|\\[' . s:fnameescape . ']\|^\\[>+-]\|!\d*\)\|' . s:expand,
+            \ '\(' . dquote . '''\%(''''\|[^'']\)*''\|\\[' . s:fnameescape . ']\|^\\[>+-]\|' . s:commit_expand . '\)\|' . s:expand,
             \ '\=submatch(0)[0] ==# "\\" ? submatch(0)[1] : submatch(0)[1:-2]', 'g')
       call add(list, arg)
     endwhile
@@ -1598,11 +1598,20 @@ function! fugitive#repo(...) abort
 endfunction
 
 function! s:repo_dir(...) dict abort
-  throw 'fugitive: fugitive#repo().dir() has been replaced by FugitiveGitDir()'
+  if !a:0
+    return self.git_dir
+  endif
+  throw 'fugitive: fugitive#repo().dir("...") has been replaced by FugitiveFind(".git/...")'
 endfunction
 
 function! s:repo_tree(...) dict abort
-  throw 'fugitive: fugitive#repo().tree() has been replaced by FugitiveFind(":/")'
+  let tree = s:Tree(self.git_dir)
+  if empty(tree)
+    throw 'fugitive: no work tree'
+  elseif !a:0
+    return tree
+  endif
+  throw 'fugitive: fugitive#repo().tree("...") has been replaced by FugitiveFind(":(top)...")'
 endfunction
 
 function! s:repo_bare() dict abort
@@ -1628,11 +1637,11 @@ function! s:repo_git_command(...) dict abort
 endfunction
 
 function! s:repo_git_chomp(...) dict abort
-  throw 'fugitive: fugitive#repo().git_chomp(...) has been replaced by FugitiveExecute(...).stdout'
+  silent return substitute(system(fugitive#ShellCommand(a:000, self.git_dir)), '\n$', '', '')
 endfunction
 
 function! s:repo_git_chomp_in_tree(...) dict abort
-  throw 'fugitive: fugitive#repo().git_chomp_in_tree(...) has been replaced by FugitiveExecute(...).stdout'
+  return call(self.git_chomp, a:000, self)
 endfunction
 
 function! s:repo_rev_parse(rev) dict abort
@@ -1642,7 +1651,7 @@ endfunction
 call s:add_methods('repo',['git_command','git_chomp','git_chomp_in_tree','rev_parse'])
 
 function! s:repo_config(name) dict abort
-  throw 'fugitive: fugitive#repo().config(...) has been replaced by FugitiveConfigGet(...)'
+  return FugitiveConfigGet(a:name, self.git_dir)
 endfunction
 
 call s:add_methods('repo',['config'])
@@ -1949,6 +1958,7 @@ endfunction
 let s:var = '\%(<\%(cword\|cWORD\|cexpr\|cfile\|sfile\|slnum\|afile\|abuf\|amatch' . (has('clientserver') ? '\|client' : '') . '\)>\|%\|#<\=\d\+\|##\=\)'
 let s:flag = '\%(:[p8~.htre]\|:g\=s\(.\).\{-\}\1.\{-\}\1\)'
 let s:expand = '\%(\(' . s:var . '\)\(' . s:flag . '*\)\(:S\)\=\)'
+let s:commit_expand = '!\\\@!#\=\d*\|!%'
 
 function! s:BufName(var) abort
   if a:var ==# '%'
@@ -1969,8 +1979,8 @@ function! s:ExpandVar(other, var, flags, esc, ...) abort
     return substitute(a:other[1:-2], "''", "'", "g")
   elseif a:other =~# '^"'
     return substitute(a:other[1:-2], '""', '"', "g")
-  elseif a:other =~# '^!'
-    let buffer = s:BufName(len(a:other) > 1 ? '#'. a:other[1:-1] : '%')
+  elseif a:other =~# '^[!`]'
+    let buffer = s:BufName(a:other =~# '[0-9#]' ? '#' . matchstr(a:other, '\d\+') : '%')
     let owner = s:Owner(buffer)
     return len(owner) ? owner : '@'
   elseif a:other =~# '^\~[~.]$'
@@ -2024,7 +2034,11 @@ function! s:ExpandVar(other, var, flags, esc, ...) abort
   return join(files, "\1")
 endfunction
 
-let s:fnameescape = " \t\n*?[{`$\\%#'\"|!<"
+if has('win32')
+  let s:fnameescape = " \t\n*?`%#'\"|!<"
+else
+  let s:fnameescape = " \t\n*?[{`$\\%#'\"|!<"
+endif
 
 function! s:Expand(rev, ...) abort
   if a:rev =~# '^>' && s:Slash(@%) =~# '^fugitive://' && empty(s:DirCommitFile(@%)[1])
@@ -2051,13 +2065,13 @@ function! s:Expand(rev, ...) abort
     let file = a:rev
   endif
   return substitute(file,
-        \ '\(\\[' . s:fnameescape . ']\|^\\[>+-]\|!\d*\|^\~[~.]\)\|' . s:expand,
+        \ '\(\\[' . s:fnameescape . ']\|^\\[>+-]\|' . s:commit_expand . '\|^\~[~.]\)\|' . s:expand,
         \ '\=tr(s:ExpandVar(submatch(1),submatch(2),submatch(3),"", a:0 ? a:1 : getcwd()), "\1", " ")', 'g')
 endfunction
 
 function! fugitive#Expand(object) abort
   return substitute(a:object,
-        \ '\(\\[' . s:fnameescape . ']\|^\\[>+-]\|!\d*\|^\~[~.]\)\|' . s:expand,
+        \ '\(\\[' . s:fnameescape . ']\|^\\[>+-]\|' . s:commit_expand . '\|^\~[~.]\)\|' . s:expand,
         \ '\=tr(s:ExpandVar(submatch(1),submatch(2),submatch(3),submatch(5)), "\1", " ")', 'g')
 endfunction
 
@@ -2078,7 +2092,7 @@ function! s:SplitExpandChain(string, ...) abort
             \ '\=s:DotRelative(s:Slash(simplify(getcwd() . "/" . submatch(0))), cwd)', '')
     endif
     let arg = substitute(arg,
-          \ '\(' . dquote . '''\%(''''\|[^'']\)*''\|\\[' . s:fnameescape . ']\|^\\[>+-]\|!\d*\|^\~[~]\|^\~\w*\|\$\w\+\)\|' . s:expand,
+          \ '\(' . dquote . '''\%(''''\|[^'']\)*''\|\\[' . s:fnameescape . ']\|^\\[>+-]\|' . s:commit_expand . '\|^\~[~]\|^\~\w*\|\$\w\+\)\|' . s:expand,
           \ '\=s:ExpandVar(submatch(1),submatch(2),submatch(3),submatch(5), cwd)', 'g')
     call extend(list, split(arg, "\1", 1))
     if arg ==# '--'
@@ -2388,7 +2402,7 @@ function! s:GlobComplete(lead, pattern, ...) abort
   if a:lead ==# '/'
     return []
   else
-    let results = glob(a:lead . a:pattern, a:0 ? a:1 : 0, 1)
+    let results = glob(substitute(a:lead . a:pattern, '[\{}]', '\\&', 'g'), a:0 ? a:1 : 0, 1)
   endif
   call map(results, 'v:val !~# "/$" && isdirectory(v:val) ? v:val."/" : v:val')
   call map(results, 'v:val[ strlen(a:lead) : -1 ]')
@@ -7196,9 +7210,9 @@ function! s:BlameMaps(is_ftplugin) abort
   call s:Map('n', 'o',    ':<C-U>exe <SID>BlameCommit("split")<CR>', '<silent>', ft)
   call s:Map('n', 'O',    ':<C-U>exe <SID>BlameCommit("tabedit")<CR>', '<silent>', ft)
   call s:Map('n', 'p',    ':<C-U>exe <SID>BlameCommit("pedit")<CR>', '<silent>', ft)
-  call s:Map('n', '.',    ":<C-U> <C-R>=substitute(<SID>BlameCommitFileLnum()[0],'^$','@','')<CR><Home>", ft)
-  call s:Map('n', '(',    "-", ft)
-  call s:Map('n', ')',    "+", ft)
+  exe s:Map('n', '.',    ":<C-U> <C-R>=substitute(<SID>BlameCommitFileLnum()[0],'^$','@','')<CR><Home>", '', ft)
+  exe s:Map('n', '(',    "-", '', ft)
+  exe s:Map('n', ')',    "+", '', ft)
   call s:Map('n', 'A',    ":<C-u>exe 'vertical resize '.(<SID>linechars('.\\{-\\}\\ze [0-9:/+-][0-9:/+ -]* \\d\\+)')+1+v:count)<CR>", '<silent>', ft)
   call s:Map('n', 'C',    ":<C-u>exe 'vertical resize '.(<SID>linechars('^\\S\\+')+1+v:count)<CR>", '<silent>', ft)
   call s:Map('n', 'D',    ":<C-u>exe 'vertical resize '.(<SID>linechars('.\\{-\\}\\ze\\d\\ze\\s\\+\\d\\+)')+1-v:count)<CR>", '<silent>', ft)
@@ -7539,7 +7553,7 @@ function! s:SquashArgument(...) abort
   if &filetype == 'fugitive'
     let commit = matchstr(getline('.'), '^\%(\%(\x\x\x\)\@!\l\+\s\+\)\=\zs[0-9a-f]\{4,\}\ze \|^' . s:ref_header . ': \zs\S\+')
   elseif has_key(s:temp_files, s:cpath(expand('%:p')))
-    let commit = matchstr(getline('.'), '\S\@<!\x\{4,\}\>')
+    let commit = matchstr(getline('.'), '\S\@<!\x\{4,\}\S\@!')
   else
     let commit = s:Owner(@%)
   endif
@@ -7585,7 +7599,7 @@ function! s:HunkPosition(lnum) abort
     let lnum -= 1
     let line_char = getline(lnum)[0]
   endwhile
-  let starts = matchlist(getline(lnum), '^@@\+[ 0-9,-]* -\(\d\+\),\d\+ +\(\d\+\),')
+  let starts = matchlist(getline(lnum), '^@@\+[ 0-9,-]* -\(\d\+\)\%(,\d\+\)\= +\(\d\+\)[ ,]')
   if empty(starts)
     return [0, 0, 0]
   endif
