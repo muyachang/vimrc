@@ -14,9 +14,6 @@ set number
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Themes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme solarized
-"colorscheme ir_black
-colorscheme pyte
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => verilog_systemverilog.vim
@@ -39,6 +36,7 @@ nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim tabs
+" TODO: Organize me
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap tn  :tabnew<Space>
 nnoremap tm  :tabm<Space>
@@ -46,6 +44,16 @@ nnoremap tk  :tabnext<CR>
 nnoremap tj  :tabprev<CR>
 nnoremap th  :tabfirst<CR>
 nnoremap tl  :tablast<CR>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext<cr>
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+" TODO: Check out what's this for
+map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => reverse selected text

@@ -1,5 +1,5 @@
 temp_dirs/undodir/*
-sources_non_forked/ack.vim/.netrwhist
-sources_non_forked/tlib/doc/tags
-sources_non_forked/ctrlp.vim/doc/tags*
+pack/notsureyet/start/ack.vim/.netrwhist
+pack/notsureyet/start/tlib/doc/tags
+pack/notsureyet/start/ctrlp.vim/doc/tags*
 tags
