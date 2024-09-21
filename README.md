@@ -77,6 +77,8 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 	* `gc` to comment out the target of a motion
 	* `gcu` uncomments a set of adjacent commented lines
 * [vim-easy-align](https://github.com/junegunn/vim-easy-align.git):
+* [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
+* [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
 * [vim-perforce](https://github.com/nfvs/vim-perforce.git):
 * [vim-yankstack](https://github.com/maxbrunsfeld/vim-yankstack.git):
 
@@ -86,9 +88,7 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 * [auto-pairs](https://github.com/jiangmiao/auto-pairs.git):
 * [copilot.vim](https://github.com/github/copilot.vim): GitHub Copilot
 * [repeat](https://tpope.io/vim/repeat.git):
-* [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
 * [vim-lastplace](https://github.com/farmergreg/vim-lastplace.git):
-* [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
 * [vim-surround](https://github.com/tpope/vim-surround.git): 
 
 
