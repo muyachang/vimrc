@@ -1,83 +1,84 @@
-""""""""""""""""""""""""""""""
-" => Enable native vim packages as described in the README
-""""""""""""""""""""""""""""""
-set packpath+=~/.vim_runtime
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ack.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use the the_silver_searcher if possible (much faster than Ack)
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+
+" Open Ack and put the cursor in the right position
+nnoremap <leader>g :Ack<Space>
+
+" Do :help cope if you are unsure what cope is. It's super useful!
+"
+" When you search with Ack, display your results in cope by doing:
+"   <leader>cc
+"
+" To go to the next search result do:
+"   <leader>n
+"
+" To go to the previous search results do:
+"   <leader>p
+"
+nnoremap <leader>cc :botright cope<cr>
+nnoremap <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+nnoremap <leader>n :cn<cr>
+nnoremap <leader>p :cp<cr>
 
 
-""""""""""""""""""""""""""""""
-" => bufExplorer plugin
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bufexplorer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
-map <leader>o :BufExplorer<cr>
+nnoremap <leader>o :BufExplorer<cr>
 
 
-""""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => mru.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
+nnoremap <leader>f :MRU<CR>
 
 
-""""""""""""""""""""""""""""""
-" => YankStack
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-yankstack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:yankstack_yank_keys = ['y', 'd']
 
 nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 
-""""""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ctrlp.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_working_path_mode = 0
 
 " Quickly find and open a file in the current working directory
 let g:ctrlp_map = '<C-f>'
-map <leader>j :CtrlP<cr>
+nnoremap <leader>j :CtrlP<cr>
 
 " Quickly find and open a buffer
-map <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 
-""""""""""""""""""""""""""""""
-" => ZenCoding
-""""""""""""""""""""""""""""""
-" Enable all functions in all modes
-let g:user_zen_mode='a'
-
-
-""""""""""""""""""""""""""""""
-" => snipMate (beside <TAB> support <CTRL-j>)
-""""""""""""""""""""""""""""""
-ino <C-j> <C-r>=snipMate#TriggerSnippet()<cr>
-snor <C-j> <esc>i<right><C-r>=snipMate#TriggerSnippet()<cr>
-let g:snipMate = { 'snippet_version' : 1 }
-
-
-""""""""""""""""""""""""""""""
-" => Vim grep
-""""""""""""""""""""""""""""""
-let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
-set grepprg=/bin/grep\ -nH
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
+" => nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=0
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+nnoremap <leader>nn :NERDTreeToggle<cr>
+nnoremap <leader>nb :NERDTreeFromBookmark<Space>
+nnoremap <leader>nf :NERDTreeFind<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,15 +98,15 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => surround.vim config
-" Annotate strings with gettext 
+" => vim-surround
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Annotate strings with gettext
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => lightline
+" => lightline.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -128,17 +129,9 @@ let g:lightline = {
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ale (syntax checker and linter)
+" => ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
 \   'javascript': ['eslint'],
@@ -156,23 +149,12 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_virtualtext_cursor = 'disabled'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-easy-align
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git gutter (Git diff)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => EditorConfig (project-specific EditorConfig rule)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fugitive
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Copy the link to the line of a Git repository to the clipboard
-nnoremap <leader>v :.GBrowse!<CR>
-xnoremap <leader>v :GBrowse!<CR>

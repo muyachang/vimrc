@@ -8,6 +8,7 @@ from os import path
 
 # --- Globals ----------------------------------------------
 PLUGINS = """
+ack.vim https://github.com/mileszs/ack.vim.git
 ale https://github.com/dense-analysis/ale
 auto-pairs https://github.com/jiangmiao/auto-pairs
 bufexplorer https://github.com/jlanzarotta/bufexplorer
@@ -26,13 +27,8 @@ vim-indent-object https://github.com/michaeljsmith/vim-indent-object
 vim-lastplace https://github.com/farmergreg/vim-lastplace.git
 vim-multiple-cursors https://github.com/terryma/vim-multiple-cursors
 vim-surround https://github.com/tpope/vim-surround
-dracula https://github.com/dracula/vim
-gruvbox https://github.com/morhetz/gruvbox
-mayansmoke https://github.com/vim-scripts/mayansmoke
-papercolor-theme https://github.com/NLKNguyen/papercolor-theme.git
+vim-yankstack https://github.com/maxbrunsfeld/vim-yankstack.git
 peaksea https://github.com/vim-scripts/peaksea.git
-vim-colors-solarized https://github.com/altercation/vim-colors-solarized
-vim-irblack https://github.com/wesgibbs/vim-irblack.git
 vim-pyte https://github.com/therubymug/vim-pyte
 """.strip()
 
