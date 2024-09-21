@@ -236,7 +236,7 @@ command! Bclose call <SID>BufcloseCloseIt()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func! DeleteTillSlash()
+function! DeleteTillSlash()
     let g:cmd = getcmdline()
 
     if has("win16") || has("win32")
@@ -254,11 +254,11 @@ func! DeleteTillSlash()
     endif   
 
     return g:cmd_edited
-endfunc
+endfunction
 
-func! CurrentFileDir(cmd)
+function! CurrentFileDir(cmd)
     return a:cmd . " " . escape(expand("%:p:h"), " ") . "/"
-endfunc
+endfunction
 
 function! <SID>BufcloseCloseIt()
     let l:currentBufNum = bufnr("%")
