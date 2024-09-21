@@ -1,0 +1,3 @@
+[submodule "pack/automation/start/auto-pairs"]
+	path = pack/automation/start/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs.git
