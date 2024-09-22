@@ -1,3 +1,63 @@
 [submodule "pack/automation/start/auto-pairs"]
 	path = pack/automation/start/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
+[submodule "pack/automation/start/copilot"]
+	path = pack/automation/start/copilot
+	url = https://github.com/github/copilot.vim
+[submodule "pack/automation/start/repeat"]
+	path = pack/automation/start/repeat
+	url = https://tpope.io/vim/repeat.git
+[submodule "pack/automation/start/lastplace"]
+	path = pack/automation/start/lastplace
+	url = https://github.com/farmergreg/vim-lastplace.git
+[submodule "pack/automation/start/surround"]
+	path = pack/automation/start/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "pack/colorschemes/start/peaksea"]
+	path = pack/colorschemes/start/peaksea
+	url = https://github.com/vim-scripts/peaksea
+[submodule "pack/decorations/start/lightline-ale"]
+	path = pack/decorations/start/lightline-ale
+	url = https://github.com/maximbaz/lightline-ale.git
+[submodule "pack/decorations/start/lightline"]
+	path = pack/decorations/start/lightline
+	url = https://github.com/itchyny/lightline.vim
+[submodule "pack/syntax/start/ale"]
+	path = pack/syntax/start/ale
+	url = https://github.com/dense-analysis/ale
+[submodule "pack/syntax/start/verilog"]
+	path = pack/syntax/start/verilog
+	url = https://github.com/vhda/verilog_systemverilog.vim.git
+[submodule "pack/efficiency/start/ack"]
+	path = pack/efficiency/start/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "pack/efficiency/start/bufexplorer"]
+	path = pack/efficiency/start/bufexplorer
+	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule "pack/efficiency/start/ctrlp"]
+	path = pack/efficiency/start/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "pack/efficiency/nerdtree"]
+	path = pack/efficiency/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "pack/efficiency/start/nerdtree"]
+	path = pack/efficiency/start/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "pack/automation/start/commentary"]
+	path = pack/automation/start/commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "pack/automation/start/easy-align"]
+	path = pack/automation/start/easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "pack/efficiency/start/indent-guides"]
+	path = pack/efficiency/start/indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides
+[submodule "pack/efficiency/start/multiple-cursors"]
+	path = pack/efficiency/start/multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors
+[submodule "pack/efficiency/start/perforce"]
+	path = pack/efficiency/start/perforce
+	url = https://github.com/nfvs/vim-perforce.git
+[submodule "pack/efficiency/start/yankstack"]
+	path = pack/efficiency/start/yankstack
+	url = https://github.com/maxbrunsfeld/vim-yankstack.git
