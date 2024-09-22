@@ -36,6 +36,7 @@ set backspace=eol,start,indent
 " Enable filetype plugins and indent
 filetype plugin indent on
 
+
 "-------------------------------
 " interface related
 "-------------------------------
