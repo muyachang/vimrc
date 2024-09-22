@@ -59,37 +59,37 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 ### Decorations
 
 * [lightline-ale](https://github.com/maximbaz/lightline-ale.git): 
-* [lightline.vim](https://github.com/itchyny/lightline.vim): A light and configurable statusline/tabline for Vim
+* [lightline](https://github.com/itchyny/lightline.vim): A light and configurable statusline/tabline for Vim
 
 ### Syntax
 
 * [ale](https://github.com/dense-analysis/ale): Syntax and lint checking for vim (ALE requires NeoVim >= 0.2.0 or Vim 8 with +timers +job +channel)
-* [verilog_systemverilog.vim](https://github.com/vhda/verilog_systemverilog.vim.git): Syntax for verilog & system-verilog
+* [verilog](https://github.com/vhda/verilog_systemverilog.vim.git): Syntax for verilog (& system-verilog)
 
 ### Efficiency
 
-* [ack.vim](https://github.com/mileszs/ack.vim.git):
+* [ack](https://github.com/mileszs/ack.vim.git):
 * [bufexplorer](https://github.com/jlanzarotta/bufexplorer.git): Quickly and easily switch between buffers
-* [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim): Fuzzy file, buffer, mru and tag finder
+* [ctrlp](https://github.com/ctrlpvim/ctrlp.vim): Fuzzy file, buffer, mru and tag finder
 * [nerdtree](https://github.com/preservim/nerdtree): Explore files in tree structure
-* [vim-commentary](https://github.com/tpope/vim-commentary): Help comment stuff on/off.
-	* `gcc` to comment out a line (takes a count)
-	* `gc` to comment out the target of a motion
-	* `gcu` uncomments a set of adjacent commented lines
-* [vim-easy-align](https://github.com/junegunn/vim-easy-align.git):
-* [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
-* [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
-* [vim-perforce](https://github.com/nfvs/vim-perforce.git):
-* [vim-yankstack](https://github.com/maxbrunsfeld/vim-yankstack.git):
+* [indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
+* [multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
+* [perforce](https://github.com/nfvs/vim-perforce.git):
+* [yankstack](https://github.com/maxbrunsfeld/vim-yankstack.git):
 
 
 ### Automation
 
 * [auto-pairs](https://github.com/jiangmiao/auto-pairs.git):
-* [copilot.vim](https://github.com/github/copilot.vim): GitHub Copilot
+* [commentary](https://github.com/tpope/vim-commentary): Help comment stuff on/off.
+	* `gcc` to comment out a line (takes a count)
+	* `gc` to comment out the target of a motion
+	* `gcu` uncomments a set of adjacent commented lines
+* [copilot](https://github.com/github/copilot.vim): GitHub Copilot
+* [easy-align](https://github.com/junegunn/vim-easy-align.git):
 * [repeat](https://tpope.io/vim/repeat.git):
-* [vim-lastplace](https://github.com/farmergreg/vim-lastplace.git):
-* [vim-surround](https://github.com/tpope/vim-surround.git): 
+* [lastplace](https://github.com/farmergreg/vim-lastplace.git):
+* [surround](https://github.com/tpope/vim-surround.git): 
 
 
 ## Key Mappings
