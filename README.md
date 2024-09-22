@@ -7,7 +7,7 @@ Over the last 10 years, I have used and tweaked Vim. This vimrc includes all the
 ## How to install?
 
 ```shell
-git clone --depth=1 https://github.com/muyachang/vimrc.git ~/.vim_runtime
+git clone --recurse-submodules https://github.com/muyachang/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_vimrc.sh
 ```
 
