@@ -6,9 +6,10 @@ Over the last 10 years, I have used and tweaked Vim. This vimrc includes all the
 
 ## How to install?
 
-	git clone --depth=1 https://github.com/muyachang/vimrc.git ~/.vim_runtime
-	sh ~/.vim_runtime/install_vimrc.sh
-
+```shell
+git clone --depth=1 https://github.com/muyachang/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_vimrc.sh
+```
 
 ## How to uninstall?
 
@@ -19,30 +20,28 @@ Over the last 10 years, I have used and tweaked Vim. This vimrc includes all the
 ## How to update?
 
 ### vimrc itself
-To update to the latest version of this vimrc can be done through rebase, not that any changes will be lost.
 
-    cd ~/.vim_runtime
-    git reset --hard
-    git clean -d --force
-    git pull --rebase
-	#TODO: Add line for update the plugins
+To update to the latest version of this vimrc can be done through either pull or rebase.
+
+```shell
+# Through git pull
+cd ~/.vim_runtime
+git pull
+
+# Through git rebase
+cd ~/.vim_runtime
+git reset --hard
+git clean -d --force
+git pull --rebase
+```
 
 ### plugins
 The plugins are managed through git submodule, to update the plugins, do the following
 
-    TODO: Add how to update the plugins
-
-
-## Fonts
-
-I recommend using [IBM Plex Mono font](https://github.com/IBM/plex) (it's an open-source and awesome font that can make your code look beautiful).
-
-Fonts that this vimrc will try to use:
-
-* [IBM Plex Mono font](https://github.com/IBM/plex)
-* [Hack](http://sourcefoundry.org/hack/)
-* [Source Code Pro](https://adobe-fonts.github.io/source-code-pro/)
-
+```shell
+cd ~/.vim_runtime
+git submodule update --init --recursive
+```
 
 ## Plugins
 
@@ -58,8 +57,8 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 
 ### Decorations
 
-* [lightline-ale](https://github.com/maximbaz/lightline-ale.git): 
-* [lightline](https://github.com/itchyny/lightline.vim): A light and configurable statusline/tabline for Vim
+* [lightline-ale](https://github.com/maximbaz/lightline-ale.git): Provides ALE indicator for the lightline plugin
+* [lightline](https://github.com/itchyny/lightline.vim): Configures statusline/tabline
 
 ### Syntax
 
@@ -71,9 +70,9 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 * [ack](https://github.com/mileszs/ack.vim.git):
 * [bufexplorer](https://github.com/jlanzarotta/bufexplorer.git): Quickly and easily switch between buffers
 * [ctrlp](https://github.com/ctrlpvim/ctrlp.vim): Fuzzy file, buffer, mru and tag finder
-* [nerdtree](https://github.com/preservim/nerdtree): Explore files in tree structure
 * [indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
 * [multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
+* [nerdtree](https://github.com/preservim/nerdtree): Explore files in tree structure
 * [perforce](https://github.com/nfvs/vim-perforce.git):
 * [yankstack](https://github.com/maxbrunsfeld/vim-yankstack.git):
 

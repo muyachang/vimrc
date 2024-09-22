@@ -23,18 +23,18 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Leader character
+" Leader character
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (nmap) Normal mode recursively
+" (nmap) Normal mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (nnoremap) Normal mode non-recursively
+" (nnoremap) Normal mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "-------------------------------
@@ -135,22 +135,22 @@ nnoremap <leader>m mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (imap) Insert mode recursively
+" (imap) Insert mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (inoremap) Insert mode non-recursively
+" (inoremap) Insert mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (vmap) Visual and Select mode recursively
+" (vmap) Visual and Select mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (vnoremap) Visual and Select mode non-recursively
+" (vnoremap) Visual and Select mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Visual mode pressing * or # searches for the current selection
@@ -165,32 +165,32 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (xmap) Visual mode recursively
+" (xmap) Visual mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (xnoremap) Visual mode non-recursively
+" (xnoremap) Visual mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (smap) Select mode recursively
+" (smap) Select mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (snoremap) Select mode non-recursively
+" (snoremap) Select mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (cmap) Command-line mode recursively
+" (cmap) Command-line mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (cnoremap) Command-line mode non-recursively
+" (cnoremap) Command-line mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Bash like keys for the command line
@@ -212,17 +212,17 @@ cnoremap $q <C-\>eDeleteTillSlash()<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (omap) Operator pending mode recursively
+" (omap) Operator pending mode recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => (onoremap) Operator pending mode non-recursively
+" (onoremap) Operator pending mode non-recursively
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Custom commands
+" Custom commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " :W sudo saves the file
@@ -234,7 +234,7 @@ command! Bclose call <SID>BufcloseCloseIt()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
+" Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! DeleteTillSlash()
     let g:cmd = getcmdline()

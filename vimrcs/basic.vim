@@ -2,11 +2,12 @@
 "
 " Sections:
 "    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
+"    -> Abbreviations
+"    -> Buffers
+"    -> Folding
+"    -> Colors
 "    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Buffers and open files
+"    -> Space, tab, indent, and line related
 "    -> Status line
 "    -> Helper functions
 "
@@ -14,7 +15,7 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
+" General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable native vim packages
@@ -34,10 +35,10 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * silent! checktime
 
+" Persistent undo --> can undo even after closing vim
+set undodir=~/.vim_runtime/temp_dirs/undodir
+set undofile
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -101,37 +102,8 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Add a bit extra margin to the left
-set foldcolumn=1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable
-
 " Set regular expression engine automatically
 set regexpengine=0
-
-" Enable 256 colors palette in True Color Terminal
-if $COLORTERM == 'truecolor'
-    set t_Co=256
-endif
-
-" Background
-set background=dark
-
-" Color Scheme
-colorscheme peaksea 
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -141,22 +113,67 @@ set ffs=unix,dos,mac
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
+" Abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
-" TODO: Is this safe? should I change it?
+" Date
+iab xdate <C-r>=strftime("%m/%d/%Y %H:%M")<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Specify the behavior when switching between buffers
+set switchbuf=useopen,usetab,newtab
+set stal=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Folding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Useful reference: https://www.vimfromscratch.com/articles/vim-folding
+
+" Default fold based on indent
+set foldmethod=indent
+
+" Special fold based on marker
+autocmd FileType vim setlocal foldmethod=marker
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Background
+set background=dark
+
+" Enable syntax highlighting
+syntax enable
+
+" Enable 256 colors palette in True Color Terminal
+set t_Co=256
+
+" Color Scheme
+colorscheme peaksea
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off since we version control stuff mostly anyway
 set nobackup
 set nowb
 set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
+" Space, tab, indent, and line related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
 
-" Be smart when using tabs ;)
+" Be smart when using tabs
 set smarttab
 
 " 1 tab == 2 spaces
@@ -178,49 +195,14 @@ set wrap
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Specify the behavior when switching between buffers
-set switchbuf=useopen,usetab,newtab
-set stal=2
-
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Status line
+" Status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
 
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Persistent undo
-"    means that you can undo even after you close a buffer/VIM
+" Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set undodir=~/.vim_runtime/temp_dirs/undodir
-set undofile
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General abbreviations
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
 
