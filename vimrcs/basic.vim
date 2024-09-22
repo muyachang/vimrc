@@ -4,10 +4,11 @@
 "    -> General
 "    -> Abbreviations
 "    -> Buffers
+"    -> Tabs
 "    -> Folding
 "    -> Colors
 "    -> Files and backups
-"    -> Space, tab, indent, and line related
+"    -> Tab/space, indent, and line related
 "    -> Status line
 "    -> Helper functions
 "
@@ -17,30 +18,41 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Enable native vim packages
 set packpath+=~/.vim_runtime
 
 " Sets how many lines of history VIM has to remember
 set history=500
 
+" Don't redraw while executing macros, registers and other commands (good performance config)
+set lazyredraw
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+
+" Enable filetype plugins and indent
+filetype plugin indent on
+
+"-------------------------------
+" interface related
+"-------------------------------
 " Show line number
 set number
 
-" Enable filetype plugins and indent
-filetype plugin on
-filetype indent on
+" Height of the command bar
+set cmdheight=2
 
-" Set to auto read when a file is changed from the outside
-set autoread
-au FocusGained,BufEnter * silent! checktime
+" 10 lines to see above/below the cursor
+set scrolloff=10
 
-" Persistent undo --> can undo even after closing vim
-set undodir=~/.vim_runtime/temp_dirs/undodir
-set undofile
+" Show matching brackets when text indicator is over them
+set showmatch
 
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" The time (ms) waited for a key code or mapped key sequence to complete.
+set timeoutlen=500
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
@@ -48,30 +60,22 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Turn on the Wild menu
+"-------------------------------
+" "wild.*" related
+"-------------------------------
+" Enable wilemenu
 set wildmenu
+
+" When more than one match, list all matches and complete first match.
+set wildmode=list:full
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+"set wildignore+=.git\*,.hg\*,.svn\*
 
-" Always show current position
-set ruler
-
-" Height of the command bar
-set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
+"-------------------------------
+" Search related
+"-------------------------------
 " Ignore case when searching
 set ignorecase
 
@@ -84,32 +88,21 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
+"-------------------------------
+" Sound related
+"-------------------------------
+" Don't ring the bell (beep or screen flash) for error messages.
 set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
 
-" Set regular expression engine automatically
-set regexpengine=0
+"-------------------------------
+" Behavior
+"-------------------------------
+" Set to auto read when a file is changed from the outside
+set autoread
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+" Persistent undo --> can undo even after closing vim
+set undodir=~/.vim_runtime/temp_dirs/undodir
+set undofile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -122,9 +115,18 @@ iab xdate <C-r>=strftime("%m/%d/%Y %H:%M")<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A buffer becomes hidden when it is abandoned
+set hidden
+
 " Specify the behavior when switching between buffers
 set switchbuf=useopen,usetab,newtab
-set stal=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show the line with tab page labels
+set showtabline=2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,9 +136,6 @@ set stal=2
 
 " Default fold based on indent
 set foldmethod=indent
-
-" Special fold based on marker
-autocmd FileType vim setlocal foldmethod=marker
 
 " Add a bit extra margin to the left
 set foldcolumn=1
@@ -148,14 +147,14 @@ set foldcolumn=1
 " Background
 set background=dark
 
-" Enable syntax highlighting
-syntax enable
-
 " Enable 256 colors palette in True Color Terminal
 set t_Co=256
 
 " Color Scheme
 colorscheme peaksea
+
+" Enable syntax highlighting
+syntax enable
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -168,30 +167,47 @@ set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Space, tab, indent, and line related
+" Tab/space, indent, and line related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"-------------------------------
+" Tab/space
+"-------------------------------
 " Use spaces instead of tabs
 set expandtab
 
 " Be smart when using tabs
 set smarttab
 
-" 1 tab == 2 spaces
-set shiftwidth=2
+" Number of spaces a <Tab> counts for
 set tabstop=2
 
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-" Auto indent
-set ai
+"-------------------------------
+" Indent
+"-------------------------------
+" Enable auto indent
+set autoindent
 
 " Smart indent
-set si
+set smartindent
 
-" Wrap lines
+" Number of spaces a for one level of indentation
+set shiftwidth=2
+
+"-------------------------------
+" Line
+"-------------------------------
+" Enable wrap lines
 set wrap
+
+" Enable linebreak
+set linebreak
+
+" Enable visual indent when linebreak happens
+set breakindent
+
+" Display 2 whitespaces for wrapped lines
+set showbreak=+++\ 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

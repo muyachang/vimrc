@@ -5,28 +5,24 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Automatically load vimrcs when they change
-if has("autocmd")
-  autocmd! bufwritepost ~/.vim_runtime/vimrcs/basic.vim source ~/.vim_runtime/vimrcs/basic.vim
-  autocmd! bufwritepost ~/.vim_runtime/vimrcs/automation.vim source ~/.vim_runtime/vimrcs/automation.vim
-  autocmd! bufwritepost ~/.vim_runtime/vimrcs/mappings.vim source ~/.vim_runtime/vimrcs/mappings.vim
-  autocmd! bufwritepost ~/.vim_runtime/vimrcs/syntax.vim source ~/.vim_runtime/vimrcs/syntax.vim
-  autocmd! bufwritepost ~/.vim_runtime/vimrcs/plugins_config.vim source ~/.vim_runtime/vimrcs/plugins_config.vim
-endif
+" Load vimrcs when they change
+autocmd! bufwritepost ~/.vim_runtime/vimrcs/basic.vim source ~/.vim_runtime/vimrcs/basic.vim
+autocmd! bufwritepost ~/.vim_runtime/vimrcs/automation.vim source ~/.vim_runtime/vimrcs/automation.vim
+autocmd! bufwritepost ~/.vim_runtime/vimrcs/mappings.vim source ~/.vim_runtime/vimrcs/mappings.vim
+autocmd! bufwritepost ~/.vim_runtime/vimrcs/syntax.vim source ~/.vim_runtime/vimrcs/syntax.vim
+autocmd! bufwritepost ~/.vim_runtime/vimrcs/plugins_config.vim source ~/.vim_runtime/vimrcs/plugins_config.vim
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
+" Filetype dependent foldmethod
+autocmd FileType vim setlocal foldmethod=marker
 
-" Automatically delete trailing white space on save for certain filetypes
-if has("autocmd")
-    autocmd BufWritePre *.txt,*.py,*.sh :call CleanExtraSpaces()
-endif
+" Delete trailing white space on save for certain filetypes
+autocmd BufWritePre *.txt,*.py,*.sh :call CleanExtraSpaces()
 
 " Make sure that enter is never overriden in the quickfix window
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
+" Check file every time the file gets focused or buffer entered
+autocmd FocusGained,BufEnter * silent! checktime
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helper functions
