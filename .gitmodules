@@ -61,3 +61,9 @@
 [submodule "pack/efficiency/start/yankstack"]
 	path = pack/efficiency/start/yankstack
 	url = https://github.com/maxbrunsfeld/vim-yankstack.git
+[submodule "pack/efficiency/start/fugitive"]
+	path = pack/efficiency/start/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "pack/colorschemes/start/nord"]
+	path = pack/colorschemes/start/nord
+	url = https://github.com/nordtheme/vim.git

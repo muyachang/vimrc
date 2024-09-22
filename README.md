@@ -55,6 +55,8 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 
   ![peaksea](https://camo.githubusercontent.com/8ecb61871e2adb81c439d85b28124bb70c78f600156b784ea4512953a0992cee/687474703a2f2f692e696d6775722e636f6d2f3554706536536a2e6a7067)
 
+* [nord](https://github.com/nordtheme/vim.git): 
+
 ### Decorations
 
 * [lightline-ale](https://github.com/maximbaz/lightline-ale.git): Provides ALE indicator for the lightline plugin
@@ -70,6 +72,7 @@ Use `:colorscheme <Tab>` to try out color schemes on the fly, or change it in `~
 * [ack](https://github.com/mileszs/ack.vim.git):
 * [bufexplorer](https://github.com/jlanzarotta/bufexplorer.git): Quickly and easily switch between buffers
 * [ctrlp](https://github.com/ctrlpvim/ctrlp.vim): Fuzzy file, buffer, mru and tag finder
+* [fugitive](https://github.com/tpope/vim-fugitive.git): Premier Git plugin
 * [indent-guides](https://github.com/nathanaelkane/vim-indent-guides): Visually displaying indent levels in Vim
 * [multiple-cursors](https://github.com/terryma/vim-multiple-cursors): Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S.
 * [nerdtree](https://github.com/preservim/nerdtree): Explore files in tree structure
